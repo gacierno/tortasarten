@@ -1,5 +1,6 @@
 {
   "name": "pancake",
+  "start": "node index.js",
   "version": "1.1.1",
   "description": "none",
   "scripts": {
