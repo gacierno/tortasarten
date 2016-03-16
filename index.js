@@ -32,10 +32,10 @@ app.get('/workzone', function(req, res){
 });
 app.post('/login', function(req, res){
 	var connection = mysql.createConnection({ //conecta con la base1
-	  host     : 'localhost',
-	  user     : 'root',
-	  password : 'root',
-	  database : 'base1.sql'
+	  host     : 'ec2-54-83-29-133.compute-1.amazonaws.com',
+	  user     : 'xpdgjezaphgkak',
+	  password : '3QzgObDnFePEcgxuexEGrTYHqT',
+	  database : 'd9knjcuq7cub6f'
 	});
 
 	var user = {
