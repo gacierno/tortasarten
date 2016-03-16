@@ -151,8 +151,12 @@ app.post('/addHours', function(req, res){
 
 //start the server
 
-var port = process.env.PORT || 1337;
+// var port = process.env.PORT || 1337;
 
- app.listen(port, function(){ 
- 	console.log('ready on port ' + port);
- });
+//  app.listen(port, function(){ 
+//  	console.log('ready on port ' + port);
+//  });
+
+http.listen(process.env.PORT || 1337, function(){
+  console.log('listening on', http.address().port);
+});
