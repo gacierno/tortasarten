@@ -35,7 +35,7 @@ app.post('/login', function(req, res){
 	  host     : 'localhost',
 	  user     : 'root',
 	  password : 'root',
-	  database : 'base1'
+	  database : 'base1.sql'
 	});
 
 	var user = {
