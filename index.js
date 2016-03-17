@@ -6,6 +6,11 @@ var bodyParser = require("body-parser");
 var app = express();
 var user = { mail: 'invitado'};
 
+var pg = require('pg');
+
+pg.defaults.ssl = true;
+
+
 //configure app
 
 app.set('view engine', 'ejs');
@@ -24,6 +29,16 @@ app.get('/', function(req, res){
 		user
 	});
 });
+
+connection.query('CREATE TABLE "movements" (
+  "OpNumber" int(11) NOT NULL,
+  "Date" date NOT NULL,
+  "User" tinytext NOT NULL,
+  "Task" tinytext NOT NULL,
+  "Client" tinytext NOT NULL,
+  "Proyecto" tinytext NOT NULL,
+  "Horas" int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
 
 app.get('/workzone', function(req, res){
 	res.render('workzone', 
