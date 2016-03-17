@@ -32,8 +32,6 @@ app.get('/', function(req, res){
 	  database : 'd9knjcuq7cub6f'
 	});
 
-	connection.query('CREATE TABLE "users1"');
-
 	res.render('index', {
 		user
 	});
