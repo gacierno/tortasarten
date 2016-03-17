@@ -32,15 +32,7 @@ app.get('/', function(req, res){
 	  database : 'd9knjcuq7cub6f'
 	});
 
-	connection.query('CREATE TABLE "movements" (
-	  "OpNumber" int(11) NOT NULL,
-	  "Date" date NOT NULL,
-	  "User" tinytext NOT NULL,
-	  "Task" tinytext NOT NULL,
-	  "Client" tinytext NOT NULL,
-	  "Proyecto" tinytext NOT NULL,
-	  "Horas" int(11) NOT NULL
-	) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
+	connection.query('CREATE TABLE "users1"');
 
 	res.render('index', {
 		user
