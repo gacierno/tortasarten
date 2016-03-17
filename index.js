@@ -25,20 +25,29 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 //define routes
 
 app.get('/', function(req, res){
+	var connection = mysql.createConnection({ //conecta con la base1
+	  host     : 'ec2-54-83-29-133.compute-1.amazonaws.com',
+	  user     : 'xpdgjezaphgkak',
+	  password : '3QzgObDnFePEcgxuexEGrTYHqT',
+	  database : 'd9knjcuq7cub6f'
+	});
+
+	connection.query('CREATE TABLE "movements" (
+	  "OpNumber" int(11) NOT NULL,
+	  "Date" date NOT NULL,
+	  "User" tinytext NOT NULL,
+	  "Task" tinytext NOT NULL,
+	  "Client" tinytext NOT NULL,
+	  "Proyecto" tinytext NOT NULL,
+	  "Horas" int(11) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
+
 	res.render('index', {
 		user
 	});
 });
 
-connection.query('CREATE TABLE "movements" (
-  "OpNumber" int(11) NOT NULL,
-  "Date" date NOT NULL,
-  "User" tinytext NOT NULL,
-  "Task" tinytext NOT NULL,
-  "Client" tinytext NOT NULL,
-  "Proyecto" tinytext NOT NULL,
-  "Horas" int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
+
 
 app.get('/workzone', function(req, res){
 	res.render('workzone', 
