@@ -3,21 +3,6 @@ var path = require('path'); //llama al metodo path para habilitar carpetas
 var mysql = require('mysql');
 var bodyParser = require("body-parser");
 
-var pg = require('pg');
-
-var DATABASE_URL = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
-pg.defaults.ssl = true;
-pg.connect(process.env.DATABASE_URL, function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
-
-  client
-    .query('SELECT table_schema,users1 FROM base1.sql;')
-    .on('row', function(row) {
-      console.log(JSON.stringify(row));
-    });
-});
-
 var app = express();
 var user = { mail: 'invitado'};
 
