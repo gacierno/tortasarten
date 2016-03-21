@@ -1,4 +1,4 @@
-var ver = '0.0.31';
+var ver = '0.0.32';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -65,17 +65,15 @@ app.get('/registrationzone', function(req, res){
 
 app.post('/login', function(req, res){
 	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
-	pg.connect(dbUrl, function(err, client){
-		console.log('Conected to postgress!!!');
-
-	});
+	var client = new pg.Client(dbUrl);
+	client.connect()
 
 	var user = {
 		mail: req.body.loginuser,
 		password: req.body.logpsw
 	}
 
-	connection.query('select * from users1 where Mail = ?', user.mail, function(err, result){
+	client.query('select * from users1 where Mail = ?', user.mail, function(err, result){
 		console.log(result);
 		if(result == ''){
 			console.log('Usuario no registrado');
