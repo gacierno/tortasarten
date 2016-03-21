@@ -49,17 +49,12 @@ app.post('/createtable', function(req, res) {
 
 	});
 
-	client.query("
-		CREATE TABLE 'users1' (
-		  'OpNumber' int(11) NOT NULL,
-		  'Date' date NOT NULL,
-		  'User' tinytext NOT NULL,
-		  'Task' tinytext NOT NULL,
-		  'Client' tinytext NOT NULL,
-		  'Proyecto' tinytext NOT NULL,
-		  'Horas' int(11) NOT NULL
-		) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-	");
+	client.query("CREATE TABLE users1 (
+					  Nombre tinytext NOT NULL,
+					  Apellido tinytext NOT NULL,
+					  Mail tinytext NOT NULL,
+					  Password tinytext NOT NULL,
+					  SecLevel tinytext NOT NULL);");
 });
 
 
