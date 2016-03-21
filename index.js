@@ -1,4 +1,4 @@
-var ver = '0.0.39';
+var ver = '0.0.40';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -45,7 +45,12 @@ app.post('/createtable', function(req, res) {
 	client.connect();
 
 	console.log("estamos conectados");
-	client.query('CREATE TABLE "users1" (nombre text, apellido text, mail text, password text, secLevel text);');
+	client.query('CREATE TABLE users1 (nombre text, apellido text, mail text, password text, secLevel text);');
+
+		res.render('index', {
+			user : user,
+			ver
+		});
 });
 
 
