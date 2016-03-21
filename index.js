@@ -27,10 +27,10 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 //define routes
 
 app.get('/', function(req, res){
-	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
+	// var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	
-	var client = new pg.Client(dbUrl);
-	client.connect();
+	// var client = new pg.Client(dbUrl);
+	// client.connect();
 
 	res.render('index', {
 		user, ver
@@ -56,8 +56,7 @@ app.get('/workzone', function(req, res){
 });
 
 app.get('/registrationzone', function(req, res){
-		res.render('register', 
-		user, ver
+		res.render('register'
 	);
 });
 
