@@ -1,4 +1,4 @@
-var ver = '0.0.32';
+var ver = '0.0.33';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -109,8 +109,8 @@ app.post('/login', function(req, res){
 
 app.post('/registration', function(req, res){
 	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
-	pg.connect(dbUrl, function(err, client){
-		console.log('Conected to postgress!!!');
+	var client = new pg.Client(dbUrl);
+	client.connect()
 
 	});
 
