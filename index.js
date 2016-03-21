@@ -1,4 +1,4 @@
-var ver = '0.0.29';
+var ver = '0.0.31';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
