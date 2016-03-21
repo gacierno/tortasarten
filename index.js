@@ -1,3 +1,5 @@
+var ver = '0.0.25';
+
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
 var mysql = require('mysql');
@@ -46,7 +48,7 @@ app.post('/createtable', function(req, res) {
 	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	var client = new pg.Client(dbUrl);
 	client.connect();
-	client.query('CREATE TABLE users1 (nombre text, apellido text, mail text, password text, secLevel text);');
+	client.query('CREATE TABLE "users1" (nombre text, apellido text, mail text, password text, secLevel text);');
 });
 
 
