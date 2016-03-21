@@ -41,7 +41,7 @@ app.get('/', function(req, res){
 		user
 	});
 });
-app.get('/createtable', function(req, res) {
+app.post('/createtable', function(req, res) {
 	client.query("CREATE DATABASE base1 OWNER gacierno;");
 });
 
