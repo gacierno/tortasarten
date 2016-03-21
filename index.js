@@ -63,7 +63,7 @@ app.get('/workzone', function(req, res){
 
 app.post('/registrationzone', function(req, res){
 		res.render('register', 
-		user : user, ver
+		user, ver
 	);
 });
 
