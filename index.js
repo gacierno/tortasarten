@@ -42,7 +42,24 @@ app.get('/', function(req, res){
 	});
 });
 app.post('/createtable', function(req, res) {
-	client.query("CREATE DATABASE base1 OWNER gacierno;");
+
+	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
+	pg.connect(dbUrl, function(err, client){
+		console.log('Conected to postgress!!!');
+
+	});
+
+	client.query("
+		CREATE TABLE 'users1' (
+		  'OpNumber' int(11) NOT NULL,
+		  'Date' date NOT NULL,
+		  'User' tinytext NOT NULL,
+		  'Task' tinytext NOT NULL,
+		  'Client' tinytext NOT NULL,
+		  'Proyecto' tinytext NOT NULL,
+		  'Horas' int(11) NOT NULL
+		) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+	");
 });
 
 
