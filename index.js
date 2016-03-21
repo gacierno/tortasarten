@@ -1,4 +1,4 @@
-var ver = '0.0.28';
+var ver = '0.0.29';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -27,12 +27,6 @@ app.use(express.static(path.join(__dirname, 'node_modules')));
 //define routes
 
 app.get('/', function(req, res){
-	// var connection = mysql.createConnection({ //conecta con la base1
-	//   host     : 'ec2-54-83-29-133.compute-1.amazonaws.com',
-	//   user     : 'xpdgjezaphgkak',
-	//   password : '3QzgObDnFePEcgxuexEGrTYHqT',
-	//   database : 'd9knjcuq7cub6f'
-	// });
 	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	
 	var client = new pg.Client(dbUrl);
@@ -45,12 +39,12 @@ app.get('/', function(req, res){
 app.post('/createtable', function(req, res) {
 
 
-	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
-	var client = new pg.Client(dbUrl);
-	client.connect();
+	// var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
+	// var client = new pg.Client(dbUrl);
+	// client.connect();
 
-	console.log("estamos conectados");
-	client.query('CREATE TABLE "users1" (nombre text, apellido text, mail text, password text, secLevel text);');
+	// console.log("estamos conectados");
+	// client.query('CREATE TABLE "users1" (nombre text, apellido text, mail text, password text, secLevel text);');
 });
 
 
@@ -61,7 +55,7 @@ app.get('/workzone', function(req, res){
 	);
 });
 
-app.post('/registrationzone', function(req, res){
+app.get('/registrationzone', function(req, res){
 		res.render('register', 
 		user, ver
 	);
