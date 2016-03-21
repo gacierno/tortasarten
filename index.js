@@ -1,4 +1,4 @@
-var ver = '0.0.41';
+var ver = '0.0.44';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -78,14 +78,14 @@ app.post('/login', function(req, res){
 		password: req.body.logpsw
 	}
 
-	client.query('SELECT * from "users1" where Mail = ?', user.mail, function(err, result){
+	client.query('SELECT * from users1 where mail = ?', user.mail, function(err, result){
 		console.log(result);
 		if(result == ''){
 			console.log('Usuario no registrado');
 			user = {mail: 'invitado'}
 			res.redirect('/');
 		}else{
-			console.log(result[0].Nombre);
+			console.log(result[0].nombre);
 			if(result[0].Password != user.password){
 				console.log('Ha pifiado el password');
 				user = {mail: 'invitado'}
@@ -93,10 +93,10 @@ app.post('/login', function(req, res){
 			}else{
 				console.log('Se ha logueado correctamente');
 
-				user = {mail: result[0].Mail, 
-						nombre: result[0].Nombre, 
-						apellido: result[0].Apellido, 
-						password: result[0].Password};
+				user = {mail: result[0].mail, 
+						nombre: result[0].nombre, 
+						apellido: result[0].apellido, 
+						password: result[0].password};
 				
 				// connection.query('select * from movements', function(err, result2){
 				// 	console.log(result2);
