@@ -1,4 +1,4 @@
-var ver = '0.0.50';
+var ver = '0.0.52';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -118,27 +118,25 @@ app.post('/registration', function(req, res){
 
 	var dbUrl = 'postgres://pawqseeoajiuja:zPqzNPBBBJfp40K42VcMrCZFMB@ec2-107-22-248-209.compute-1.amazonaws.com:5432/d1tcaprntlst2d';
 	var client = new pg.Client(dbUrl);
-	client.connect();
-
-	var user = {
-		nombre: req.body.userName,
-		apellido: req.body.userLast,
-		mail: req.body.userMail,
-		password: req.body.psw
-		//secLevel: 'user'
-	}
-	console.log(user);
-	client.query('insert into users1 set ?', user, function(err, result) {
-		if (err) {
-			console.error(err)
-			console.log('la pifiamo');
-			return;
+	client.connect(function(){
+		var user = {
+			nombre: req.body.userName,
+			apellido: req.body.userLast,
+			mail: req.body.userMail,
+			password: req.body.psw,
+			secLevel: 'user'
 		}
-		console.error(result);
-		console.log('salio de pedo');
+		client.query('insert into users1 set ?', user, function(err, result) {
+			if (err) {
+				console.error(err)
+				console.log('la pifiamo');
+				return;
+			};
+			console.error(result);
+			console.log('salio de pedo');
+		});
+		res.render('index', { user : user, ver} );
 	});
-	 
-	res.render('index', { user : user, ver} );
 });
 
 app.post('/addHours', function(req, res){
