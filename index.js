@@ -1,4 +1,4 @@
-var ver = '0.0.40';
+var ver = '0.0.41';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -78,7 +78,7 @@ app.post('/login', function(req, res){
 		password: req.body.logpsw
 	}
 
-	client.query('select * from users1 where Mail = ?', user.mail, function(err, result){
+	client.query('SELECT * from "users1" where Mail = ?', user.mail, function(err, result){
 		console.log(result);
 		if(result == ''){
 			console.log('Usuario no registrado');
@@ -98,14 +98,14 @@ app.post('/login', function(req, res){
 						apellido: result[0].Apellido, 
 						password: result[0].Password};
 				
-				connection.query('select * from movements', function(err, result2){
-					console.log(result2);
+				// connection.query('select * from movements', function(err, result2){
+				// 	console.log(result2);
 					res.render('workzone', {
 						user : user,
-						result2: result2,
+						result: result,
 						ver
 					});		
-				});
+				// });
 			}
 		};	
 
