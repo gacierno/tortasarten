@@ -50,11 +50,11 @@ app.post('/createtable', function(req, res) {
 	});
 
 	client.query("CREATE TABLE users1 (
-					  Nombre tinytext NOT NULL,
-					  Apellido tinytext NOT NULL,
-					  Mail tinytext NOT NULL,
-					  Password tinytext NOT NULL,
-					  SecLevel tinytext NOT NULL);");
+					  nombre tinytext,
+					  apellido tinytext,
+					  mail tinytext,
+					  password tinytext,
+					  secLevel tinytext);");
 });
 
 
