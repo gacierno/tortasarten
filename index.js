@@ -33,8 +33,9 @@ app.get('/', function(req, res){
 	// client.connect();
 
 	res.render('index', {
-		user, ver
-	});
+			user : user,
+			ver
+		});
 });
 app.post('/createtable', function(req, res) {
 
@@ -56,7 +57,9 @@ app.get('/workzone', function(req, res){
 });
 
 app.get('/registrationzone', function(req, res){
-		res.render('register'
+		res.render('register',{
+			user : user
+		}
 	);
 });
 
