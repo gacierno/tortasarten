@@ -49,12 +49,7 @@ app.post('/createtable', function(req, res) {
 
 	});
 
-	client.query("CREATE TABLE users1 (
-					  nombre tinytext,
-					  apellido tinytext,
-					  mail tinytext,
-					  password tinytext,
-					  secLevel tinytext);");
+	client.query('CREATE TABLE users1 (nombre tinytext, apellido tinytext, mail tinytext, password tinytext, secLevel tinytext);');
 });
 
 
