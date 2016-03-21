@@ -10,8 +10,6 @@ var pg = require('pg');
 
 pg.defaults.ssl = true;
 
-var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
-
 
 //configure app
 
@@ -33,6 +31,9 @@ app.get('/', function(req, res){
 	//   password : '3QzgObDnFePEcgxuexEGrTYHqT',
 	//   database : 'd9knjcuq7cub6f'
 	// });
+	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
+	
+	var client = new pg.Client(dbUrl);
 	pg.connect(dbUrl, function(err, client){
 		console.log('Conected to postgress!!!');
 
@@ -44,8 +45,9 @@ app.get('/', function(req, res){
 });
 app.post('/createtable', function(req, res) {
 
-	var client = pg.Client(process.env.dbUrl);
-	
+
+	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
+	var client = new pg.Client(dbUrl);
 	pg.connect(dbUrl, function(err, client){
 		console.log('Conected to postgress!!!');
 
@@ -69,6 +71,7 @@ app.get('/registrationzone', function(req, res){
 });
 
 app.post('/login', function(req, res){
+	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	pg.connect(dbUrl, function(err, client){
 		console.log('Conected to postgress!!!');
 
@@ -114,6 +117,7 @@ app.post('/login', function(req, res){
 });
 
 app.post('/registration', function(req, res){
+	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	pg.connect(dbUrl, function(err, client){
 		console.log('Conected to postgress!!!');
 
@@ -140,6 +144,7 @@ app.post('/registration', function(req, res){
 
 app.post('/addHours', function(req, res){
 
+	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	pg.connect(dbUrl, function(err, client){
 		console.log('Conected to postgress!!!');
 
