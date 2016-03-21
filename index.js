@@ -1,4 +1,4 @@
-var ver = '0.0.44';
+var ver = '0.0.47';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -80,7 +80,7 @@ app.post('/login', function(req, res){
 
 	client.query('SELECT * from users1 where mail = ?', user.mail, function(err, result){
 		console.log(result);
-		if(result == ''){
+		if(result == '' || result == undefined){
 			console.log('Usuario no registrado');
 			user = {mail: 'invitado'}
 			res.redirect('/');
@@ -120,12 +120,13 @@ app.post('/registration', function(req, res){
 	client.connect();
 
 	var user = {
-		Nombre: req.body.userName,
-		Apellido: req.body.userLast,
-		Mail: req.body.userMail,
+		nombre: req.body.userName,
+		apellido: req.body.userLast,
+		mail: req.body.userMail,
 		password: req.body.psw,
 		secLevel: 'user'
 	}
+	console.log(user);
 	client.query('insert into users1 set ?', user, function(err, result) {
 		if (err) {
 			console.error(err)
