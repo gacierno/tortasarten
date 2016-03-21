@@ -1,4 +1,4 @@
-var ver = '0.0.26';
+var ver = '0.0.27';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -61,7 +61,7 @@ app.get('/workzone', function(req, res){
 	);
 });
 
-app.get('/registrationzone', function(req, res){
+app.post('/registrationzone', function(req, res){
 		res.render('register', 
 		user, ver
 	);
