@@ -49,7 +49,7 @@ app.post('/createtable', function(req, res) {
 	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	var client = new pg.Client(dbUrl);
 	client.connect();
-	client.query('CREATE TABLE users1 (nombre tinytext, apellido tinytext, mail tinytext, password tinytext, secLevel tinytext);');
+	client.query('CREATE TABLE users1 (nombre text, apellido text, mail text, password text, secLevel text);');
 });
 
 
