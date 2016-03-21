@@ -43,13 +43,16 @@ app.get('/', function(req, res){
 });
 app.post('/createtable', function(req, res) {
 
+
 	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
+	var client = pg.Client(process.env.dbUrl);
+	
 	pg.connect(dbUrl, function(err, client){
 		console.log('Conected to postgress!!!');
-		client.query('CREATE TABLE users1 (nombre tinytext, apellido tinytext, mail tinytext, password tinytext, secLevel tinytext);');
 
 	});
 
+	client.query('CREATE TABLE users1 (nombre tinytext, apellido tinytext, mail tinytext, password tinytext, secLevel tinytext);');
 });
 
 
