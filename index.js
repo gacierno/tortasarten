@@ -1,4 +1,4 @@
-var ver = '0.0.34';
+var ver = '0.0.35';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -120,7 +120,7 @@ app.post('/registration', function(req, res){
 		password: req.body.psw,
 		secLevel: 'user'
 	}
-	var query = connection.query('insert into users1 set ?', user, function(err, result) {
+	client.query('insert into users1 set ?', user, function(err, result) {
 		if (err) {
 			console.error(err)
 			return;
