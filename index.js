@@ -34,10 +34,7 @@ app.get('/', function(req, res){
 	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	
 	var client = new pg.Client(dbUrl);
-	pg.connect(dbUrl, function(err, client){
-		console.log('Conected to postgress!!!');
-
-	});
+	client.connect();
 
 	res.render('index', {
 		user
