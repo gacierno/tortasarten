@@ -1,4 +1,4 @@
-var ver = '0.0.47';
+var ver = '0.0.50';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -78,9 +78,10 @@ app.post('/login', function(req, res){
 		password: req.body.logpsw
 	}
 
-	client.query('SELECT * from users1 where mail = ?', user.mail, function(err, result){
+	client.query('SELECT * from users1', function(err, result){
+		console.log(user);
 		console.log(result);
-		if(result == '' || result == undefined){
+		if(err){
 			console.log('Usuario no registrado');
 			user = {mail: 'invitado'}
 			res.redirect('/');
@@ -123,16 +124,18 @@ app.post('/registration', function(req, res){
 		nombre: req.body.userName,
 		apellido: req.body.userLast,
 		mail: req.body.userMail,
-		password: req.body.psw,
-		secLevel: 'user'
+		password: req.body.psw
+		//secLevel: 'user'
 	}
 	console.log(user);
 	client.query('insert into users1 set ?', user, function(err, result) {
 		if (err) {
 			console.error(err)
+			console.log('la pifiamo');
 			return;
 		}
 		console.error(result);
+		console.log('salio de pedo');
 	});
 	 
 	res.render('index', { user : user, ver} );
