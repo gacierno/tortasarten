@@ -49,6 +49,13 @@ app.get('/workzone', function(req, res){
 		user
 	);
 });
+
+app.get('/registrationzone', function(req, res){
+		res.render('register', 
+		user
+	);
+});
+
 app.post('/login', function(req, res){
 	var dbUrl = 'postgres://xpdgjezaphgkak:3QzgObDnFePEcgxuexEGrTYHqT@ec2-54-83-29-133.compute-1.amazonaws.com:5432/d9knjcuq7cub6f';
 	pg.connect(dbUrl, function(err, client){

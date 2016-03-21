@@ -66,20 +66,18 @@
 		<div class="alert alert-success" role="alert">
 			<p>Logeed in as <%= user.mail %></p>
 		</div>
-		<h2>Please Log In</h2>
 
-		<div class="submit-area">
-			<form action="/login" method="post">			
-				<p>Usuario (mail):</p>
-				<input type="text" name="loginuser"label="Email">
-				<p>Password</p>
-				<input type="password" name="logpsw" label="Password">
-				<input type="submit">
-			</form>
-		</div>
 		<div class="register-area">
-			<form action="/registrationzone" method="post">	
+			<form action="/registration" method="post">	
 				<h2>Registrar Nuevos Usuarios</h2>		
+				<p>Nombre</p>
+				<input type="text" name="userName" label="Name">
+				<p>Apellido</p>
+				<input type="text" name="userLast" label="Last">
+				<p>E-mail</p>
+				<input type="text" name="userMail"label="Email">
+				<p>Password</p>
+				<input type="password" name="psw" label="Password">
 				<input type="submit">
 
 			</form>
