@@ -1,4 +1,4 @@
-var ver = '0.0.35';
+var ver = '0.0.38';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -97,7 +97,8 @@ app.post('/login', function(req, res){
 					console.log(result2);
 					res.render('workzone', {
 						user : user,
-						result2: result2
+						result2: result2,
+						ver
 					});		
 				});
 			}
@@ -128,8 +129,7 @@ app.post('/registration', function(req, res){
 		console.error(result);
 	});
 	 
-	connection.end();
-	res.render('index', { user : user} );
+	res.render('index', { user : user, ver} );
 });
 
 app.post('/addHours', function(req, res){
