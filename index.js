@@ -1,4 +1,4 @@
-var ver = '0.2.00';
+var ver = '0.2.01';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -98,10 +98,7 @@ app.post('/login', function(req, res){
 	}
 
 	var query = client.query('SELECT * FROM users1 WHERE mail = ($1)', [user.mail], function(err, result){
-		console.log(result.rows[0].mail);
-		console.log(result.rows[0].password);
-		console.log(user.mail);
-		console.log(user.password);
+
 		if(result.rows[0].mail == user.mail && result.rows[0].password == user.password){
 			canLoad = true;
 			user = result.rows[0];
