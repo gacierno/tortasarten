@@ -1,4 +1,4 @@
-var ver = '0.2.01';
+var ver = '0.3.01';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -99,28 +99,39 @@ app.post('/login', function(req, res){
 
 	var query = client.query('SELECT * FROM users1 WHERE mail = ($1)', [user.mail], function(err, result){
 
-		if(result.rows[0].mail == user.mail && result.rows[0].password == user.password){
-			canLoad = true;
-			user = result.rows[0];
-		};
-		// console.log(user);
-		if(canLoad){
-			query = client.query('SELECT * FROM movements', function(err, result2){
-				console.log(result2);
-				query.on('end', function(){ client.end();});
-				res.render('workzone', {
-					user : user,	
-					result2 : result2 
-				});
-			});
-		}else{
-			console.log("Unregistered User");
+		if(result.rowCount == 0){
+			console.log('Unregistered User');
 			query.on('end', function(){ client.end();});
 			res.render('index', {
 				user : user,	
 					ver
 			});
+
+		}else{		
+			if(result.rows[0].mail == user.mail && result.rows[0].password == user.password){
+				canLoad = true;
+				user = result.rows[0];
+			};
+			if(canLoad){
+				query = client.query('SELECT * FROM movements', function(err, result2){
+					console.log(result2);
+					query.on('end', function(){ client.end();});
+					res.render('workzone', {
+						user : user,	
+						result2 : result2 
+					});
+				});
+			}else{
+				console.log('Unregistered User');
+				query.on('end', function(){ client.end();});
+				res.render('index', {
+					user : user,	
+						ver
+				});
+			};
+
 		};
+
 	});
 });
 
