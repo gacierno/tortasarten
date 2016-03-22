@@ -1,4 +1,4 @@
-var ver = '0.0.72';
+var ver = '0.2.00';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -91,53 +91,49 @@ app.post('/login', function(req, res){
 	var dbUrl = 'postgres://pawqseeoajiuja:zPqzNPBBBJfp40K42VcMrCZFMB@ec2-107-22-248-209.compute-1.amazonaws.com:5432/d1tcaprntlst2d';
 	var client = new pg.Client(dbUrl);
 	client.connect()
-
+	var canLoad = false;
 	var user = {
 		mail: req.body.loginuser,
 		password: req.body.logpsw
 	}
 
-	client.query('SELECT * from users1', function(err, result){
-		console.log(user);
-		console.log(result);
-		if(err){
-			console.log('Usuario no registrado');
-			user = {mail: 'invitado'}
-			res.redirect('/');
+	var query = client.query('SELECT * FROM users1 WHERE mail = ($1)', [user.mail], function(err, result){
+		console.log(result.rows[0].mail);
+		console.log(result.rows[0].password);
+		console.log(user.mail);
+		console.log(user.password);
+		if(result.rows[0].mail == user.mail && result.rows[0].password == user.password){
+			canLoad = true;
+			user = result.rows[0];
+		};
+		// console.log(user);
+		if(canLoad){
+			query = client.query('SELECT * FROM movements', function(err, result2){
+				console.log(result2);
+				query.on('end', function(){ client.end();});
+				res.render('workzone', {
+					user : user,	
+					result2 : result2 
+				});
+			});
 		}else{
-			console.log(result[0].nombre);
-			if(result[0].Password != user.password){
-				console.log('Ha pifiado el password');
-				user = {mail: 'invitado'}
-				res.redirect('/');
-			}else{
-				console.log('Se ha logueado correctamente');
-
-				user = {mail: result[0].mail, 
-						nombre: result[0].nombre, 
-						apellido: result[0].apellido, 
-						password: result[0].password};
-				
-				// connection.query('select * from movements', function(err, result2){
-				// 	console.log(result2);
-					res.render('workzone', {
-						user : user,
-						result: result,
-						ver
-					});		
-				// });
-			}
-		};	
-
+			console.log("Unregistered User");
+			query.on('end', function(){ client.end();});
+			res.render('index', {
+				user : user,	
+					ver
+			});
+		};
 	});
-
 });
+
 
 app.post('/registration', function(req, res){
 
 	var dbUrl = 'postgres://pawqseeoajiuja:zPqzNPBBBJfp40K42VcMrCZFMB@ec2-107-22-248-209.compute-1.amazonaws.com:5432/d1tcaprntlst2d';
 	var client = new pg.Client(dbUrl);
 	client.connect();
+	var canLoad = true;
 	var user = {
 		nombre: req.body.userName,
 		apellido: req.body.userLast,
@@ -145,11 +141,23 @@ app.post('/registration', function(req, res){
 		password: req.body.psw,
 		secLevel: 'user'
 	}
-	//user.mail = user.mail.replace('@', '_');
-	console.log(user);
 
-	var result = client.query("INSERT INTO users1 (nombre, apellido, mail, password, secLevel) values($1, $2, $3, $4, $5)", [user.nombre, user.apellido, user.mail, user.password, user.secLevel]);
-	console.error(result);
+	console.log(user);
+	var query = client.query('SELECT * FROM users1', function(err, result){
+		//console.log(result);
+		for (var i = result.rows.length - 1; i >= 0; i--) {
+			if (result.rows[i].mail == user.mail) {
+				console.log("User Already Exists");
+				canLoad = false;
+				return;
+			};
+		};
+	});
+	if (canLoad){
+		var query = client.query('INSERT INTO users1 (nombre, apellido, mail, password, secLevel) values($1, $2, $3, $4, $5)', [user.nombre, user.apellido, user.mail, user.password, user.secLevel]);
+		console.log("User Successfuly Loaded");
+	};
+
 	//console.log('salio de pedo');
 	query.on('end', function(){ 
 		client.end();
