@@ -1,4 +1,4 @@
-var ver = '0.0.53';
+var ver = '0.0.72';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -45,14 +45,33 @@ app.post('/createtable', function(req, res) {
 	client.connect();
 
 	console.log("estamos conectados");
-	client.query('CREATE TABLE users2 (nombre text, apellido text, mail text, password text, secLevel text);');
-
-		res.render('index', {
-			user : user,
-			ver
-		});
+	var nombreNewTable = req.body.nomTabla;
+	var query = client.query('CREATE TABLE ' + nombreNewTable + '(nombre varchar(20), apellido varchar(20), mail varchar(30), password varchar(20), secLevel varchar(20))');
+	console.log(query);
+	query.on('end', function(){ client.end();});
+	res.render('index', {
+		user : user,
+		ver
+	});
 });
 
+app.post('/createproject', function(req, res) {
+
+
+	var dbUrl = 'postgres://pawqseeoajiuja:zPqzNPBBBJfp40K42VcMrCZFMB@ec2-107-22-248-209.compute-1.amazonaws.com:5432/d1tcaprntlst2d';
+	var client = new pg.Client(dbUrl);
+	client.connect();
+
+	console.log("estamos conectados");
+	var nombreNewProj = req.body.nomProject;
+	var query = client.query('CREATE TABLE ' + nombreNewProj + '(opnumber int, opdate date, opuser varchar(20), task varchar(20), client varchar(20), proyecto varchar(20), horas int)');
+	console.log(query);
+	query.on('end', function(){ client.end();});
+	res.render('index', {
+		user : user,
+		ver
+	});
+});
 
 
 app.get('/workzone', function(req, res){
@@ -126,14 +145,14 @@ app.post('/registration', function(req, res){
 		password: req.body.psw,
 		secLevel: 'user'
 	}
-	client.query('INSERT INTO users1 ?', user, function(err, result) {
-		if (err) {
-			console.error(err)
-			console.log('la pifiamo');
-			return;
-		};
-		console.error(result);
-		console.log('salio de pedo');
+	//user.mail = user.mail.replace('@', '_');
+	console.log(user);
+
+	var result = client.query("INSERT INTO users1 (nombre, apellido, mail, password, secLevel) values($1, $2, $3, $4, $5)", [user.nombre, user.apellido, user.mail, user.password, user.secLevel]);
+	console.error(result);
+	//console.log('salio de pedo');
+	query.on('end', function(){ 
+		client.end();
 	});
 	res.render('index', { user : user, ver} );
 	
