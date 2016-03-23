@@ -1,4 +1,4 @@
-var ver = '0.3.09';
+var ver = '0.4.135';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -57,20 +57,67 @@ app.post('/createtable', function(req, res) {
 
 app.post('/createproject', function(req, res) {
 
-
 	var dbUrl = 'postgres://pawqseeoajiuja:zPqzNPBBBJfp40K42VcMrCZFMB@ec2-107-22-248-209.compute-1.amazonaws.com:5432/d1tcaprntlst2d';
 	var client = new pg.Client(dbUrl);
 	client.connect();
 
 	console.log("estamos conectados");
 	var nombreNewProj = req.body.nomProject;
-	var query = client.query('CREATE TABLE ' + nombreNewProj + '(opnumber int, opdate date, opuser varchar(20), task varchar(20), client varchar(20), proyecto varchar(20), horas int)');
+	var query = client.query('CREATE TABLE ' + nombreNewProj + '(opnumber int, opdate date, opuser varchar(50), task varchar(20), client varchar(20), proyecto varchar(20), horas int)');
 	console.log(query);
 	query.on('end', function(){ client.end();});
 	res.render('index', {
 		user : user,
 		ver
 	});
+});
+
+app.post('/checkusers', function(req, res) {
+
+	var dbUrl = 'postgres://pawqseeoajiuja:zPqzNPBBBJfp40K42VcMrCZFMB@ec2-107-22-248-209.compute-1.amazonaws.com:5432/d1tcaprntlst2d';
+	var client = new pg.Client(dbUrl);
+	client.connect();
+
+	console.log("estamos conectados");
+	var nombreTable = req.body.nomTable;
+	var query = client.query('SELECT * FROM ' + nombreTable, function(err, result){
+
+		var movePassing = result.rows;
+		console.log(movePassing);
+		query.on('end', function(){ client.end();});
+		res.render('tables', {
+			user : user,
+			movePassing : movePassing,
+			ver,
+			nombreTable
+		});		
+
+	});
+
+});
+
+app.post('/checkmoves', function(req, res) {
+
+	var dbUrl = 'postgres://pawqseeoajiuja:zPqzNPBBBJfp40K42VcMrCZFMB@ec2-107-22-248-209.compute-1.amazonaws.com:5432/d1tcaprntlst2d';
+	var client = new pg.Client(dbUrl);
+	client.connect();
+
+	console.log("estamos conectados");
+	var nombreTable = req.body.nomTable;
+	var query = client.query('SELECT * FROM ' + nombreTable, function(err, result){
+
+		var movePassing = result.rows;
+		console.log(movePassing);
+		query.on('end', function(){ client.end();});
+		res.render('tablemove', {
+			user : user,
+			movePassing : movePassing,
+			ver,
+			nombreTable
+		});		
+
+	});
+
 });
 
 
@@ -86,6 +133,8 @@ app.get('/registrationzone', function(req, res){
 		}
 	);
 });
+
+
 
 app.post('/login', function(req, res){
 	var dbUrl = 'postgres://pawqseeoajiuja:zPqzNPBBBJfp40K42VcMrCZFMB@ec2-107-22-248-209.compute-1.amazonaws.com:5432/d1tcaprntlst2d';
@@ -116,9 +165,10 @@ app.post('/login', function(req, res){
 			if(canLoad){
 				query = client.query('SELECT * FROM movements', function(err, result2){
 					query.on('end', function(){ client.end();});
+					var movePassing = result2.rows;
 					res.render('workzone', {
 						user : user,	
-						result2 : result2 
+						movePassing : movePassing 
 					});
 				});
 			}else{
@@ -180,52 +230,43 @@ app.post('/addHours', function(req, res){
 	var client = new pg.Client(dbUrl);
 	client.connect();
 
-	var n = 0;
 	var day = new Date();
 	var user = {
 		mail: req.body.userMail
 	};
-	console.log(n);
-	console.log(taskhour);
-
-	var query = client.query('SELECT * FROM movements', function(err, result){
-		n = result.rowCount + 1;
-	});
-
 	var taskhour = {
-		opnumber: n,
+		opnumber: 0,
 		date: day,
-		opuser: req.body.usermail,
+		opuser: req.body.userMail,
 		task: req.body.task,
 		client: req.body.client,
 		proyecto: 'cualquiera',
 		horas: req.body.hours
-	};	
+	};
 
-	var query = client.query('INSERT INTO movements (opnumber, opdate, opuser, task, client, proyecto, horas) values($1, $2, $3, $4, $5, $6, $7)', 
-			[taskhour.opnumber, taskhour.date, taskhour.opuser, taskhour.task, taskhour.client, taskhour.proyecto, taskhour.horas]
-		);
+	var query = client.query('SELECT * FROM movements', function(err, result){
+		var n = result.rowCount + 1;
+		taskhour.opnumber = n;
+	
+
+		console.log(n);
+	
+	});
+	console.log(taskhour);
+	var query = client.query('INSERT INTO movements (opnumber, opdate, opuser, task, client, proyecto, horas) values($1, $2, $3, $4, $5, $6, $7)',
+		 [taskhour.opnumber, taskhour.date, taskhour.opuser, taskhour.task, taskhour.client, taskhour.proyecto, taskhour.horas]);
 
 	var query = client.query('SELECT * FROM movements', function(err, result2){
 		query.on('end', function(){ client.end();});
+		console.log(result2);
+		var movePassing = result2.rows;
+		query.on('end', function(){ client.end();});
 		res.render('workzone', {
 			user : user,	
-			result2 : result2 
+			movePassing : movePassing 
 		});
 	});
 
-
-	// 	var query = connection.query('insert into movements set ?', taskhour, function(err, result) {
-	// 		if (err) {
-	// 			console.error(err);
-	// 			return;
-	// 		}
-	// 		console.error(result);
-	// 	});
-	// 	connection.query("select * from movements", function(err, result2){
-	// 		res.render('workzone', {user : user, result2 : result2});
-	// 	});
-	// } );
 });
 
 //start the server

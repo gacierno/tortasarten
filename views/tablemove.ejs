@@ -75,7 +75,7 @@
 			<p>Logeed in as <%= user.mail %></p>
 		</div>
 
-		<h2>WORK-ZONEEEEE</h2>
+		<h2><%= nombreTable %> Table Content</h2>
 		<table>
 			<tr><td>Num Op</td><td>Fecha</td><td>Usuario</td><td>Task</td><td>Client</td><td>Proyecto</td><td>Horas</td></tr>
 			<% for (var i = 0; i < movePassing.length; i++) { %>
@@ -88,26 +88,7 @@
 					<td><%= movePassing[i].horas %></td>
 				</tr>
 			<% } %>
-			<tr><td>Fecha</td><td>Usuario</td><td>Task</td><td>Client</td><td>Proyecto</td><td>Horas</td></tr>
 		</table>
-
-		<form id="add-hours" action="/addHours" method="post">
-				<p>Task</p>
-				<input type="text" name="task" label="Name">
-				<p>Client</p>
-				<input type="text" name="client" label="Last">
-				<p>Project</p>
-				<input type="text" name="project"label="Email">
-				<p>Hours</p>
-				<input type="number" name="hours" label="hours">
-
-				<input type="hidden" name='userMail' value=<%= user.mail %>>
-				<input type="submit">
-
-
-		</form>
-
-
 
 	</div>
 
