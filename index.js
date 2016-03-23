@@ -1,4 +1,4 @@
-var ver = '0.4.139';
+var ver = '0.5.150';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -277,38 +277,46 @@ app.post('/addHours', function(req, res){
 	var user = {
 		mail: req.body.userMail
 	};
-	var taskhour = {
-		opnumber: 0,
-		date: day,
-		opuser: req.body.userMail,
-		task: req.body.task,
-		client: req.body.client,
-		proyecto: 'cualquiera',
-		horas: req.body.hours
-	};
+
+	var n = 0;
 
 	var query = client.query('SELECT * FROM movements', function(err, result){
-		var n = result.rowCount + 1;
-		taskhour.opnumber = n;
-	
+		n = result.rowCount + 1;
 
-		console.log(n);
-	
-	});
-	console.log(taskhour);
-	var query = client.query('INSERT INTO movements (opnumber, opdate, opuser, task, client, proyecto, horas) values($1, $2, $3, $4, $5, $6, $7)',
-		 [taskhour.opnumber, taskhour.date, taskhour.opuser, taskhour.task, taskhour.client, taskhour.proyecto, taskhour.horas]);
+		var taskhour = {
+			opnumber: n,
+			date: day,
+			opuser: req.body.userMail,
+			task: req.body.task,
+			client: req.body.client,
+			proyecto: req.body.proyect,
+			horas: req.body.hours
+		};
 
-	var query = client.query('SELECT * FROM movements', function(err, result2){
-		query.on('end', function(){ client.end();});
-		console.log(result2);
-		var movePassing = result2.rows;
-		query.on('end', function(){ client.end();});
-		res.render('workzone', {
-			user : user,	
-			movePassing : movePassing 
-		});
+		var canLoad = true;
+
+		if(req.body.task == '' || req.body.client == '' || req.body.proyect == '' || req.body.hours == ''){
+			canLoad = false;
+		};
+
+		if(canLoad){
+			var query2 = client.query('INSERT INTO movements (opnumber, opdate, opuser, task, client, proyecto, horas) values($1, $2, $3, $4, $5, $6, $7)',
+		 		[taskhour.opnumber, taskhour.date, taskhour.opuser, taskhour.task, taskhour.client, taskhour.proyecto, taskhour.horas], function(err, result){
+					var query3 = client.query('SELECT * FROM movements', function(err, result2){
+						query.on('end', function(){ client.end();});
+						console.log(result2);
+						var movePassing = result2.rows;
+						query.on('end', function(){ client.end();});
+						res.render('workzone', {
+							user : user,	
+							movePassing : movePassing 
+						});
+					});	 			
+		 	});
+		};	
+
 	});
+
 
 });
 
