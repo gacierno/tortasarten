@@ -89,14 +89,25 @@
 
 			<form action="/checkusers" method="post" target="_blank">	
 				<h2>Listar Usuarios</h2>	
-				<input tipe="hidden" name="nomTable" value="users1">	
+				<input type="hidden" name="nomTable" value="users1">	
 				<input type="submit">
 			</form>
 			<form action="/checkmoves" method="post" target="_blank">	
 				<h2>Listar Movimientos</h2>	
-				<input tipe="hidden" name="nomTable" value="movements">	
+				<input type="hidden" name="nomTable" value="movements">	
 				<input type="submit">
 			</form>
+			<form action="/checkmoves" method="post" target="_blank">	
+				<h2>Listar Movimientos</h2>	
+				<input type="hidden" name="nomTable" value="movements">	
+				<p>Buscar por:</p>
+				<input type="text" name="field">
+				<p>Igual a:</p>
+				<input type="text" name="busqueda">
+				<input type="submit">
+			</form>
+
+
 
 		</div>
 

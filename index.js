@@ -1,4 +1,4 @@
-var ver = '0.4.135';
+var ver = '0.4.139';
 
 var express = require("express"); // llama la libreria de metodos
 var path = require('path'); //llama al metodo path para habilitar carpetas
@@ -104,19 +104,62 @@ app.post('/checkmoves', function(req, res) {
 
 	console.log("estamos conectados");
 	var nombreTable = req.body.nomTable;
-	var query = client.query('SELECT * FROM ' + nombreTable, function(err, result){
+	var campoBusca = req.body.field;
+	var coinsidencia = req.body.busqueda;
 
-		var movePassing = result.rows;
-		console.log(movePassing);
-		query.on('end', function(){ client.end();});
-		res.render('tablemove', {
-			user : user,
-			movePassing : movePassing,
-			ver,
-			nombreTable
-		});		
+	if (campoBusca == undefined || coinsidencia == ''){
+		var query = client.query('SELECT * FROM ' + nombreTable, function(err, result){
 
-	});
+			var movePassing = result.rows;
+			console.log(movePassing);
+			query.on('end', function(){ client.end();});
+			res.render('tablemove', {
+				user : user,
+				movePassing : movePassing,
+				ver,
+				nombreTable
+			});		
+
+		});
+	}else{
+		var query = client.query('SELECT * FROM ' + nombreTable + ' WHERE '+ campoBusca + ' =($1)', [coinsidencia], function(err, result){
+			var canLoad = true;
+
+			console.log(result);
+
+			if (result == undefined){canLoad =false;};
+			if (canLoad){
+
+				var movePassing = result.rows;
+				console.log(movePassing);
+				query.on('end', function(){ client.end();});
+				res.render('tablemove', {
+					user : user,
+					movePassing : movePassing,
+					ver,
+					nombreTable
+				});	
+			}else{
+				var movePassing = { opnumber: 'NO MATCH', 
+									opdate: 'NO MATCH', 
+									opuser: 'NO MATCH', 
+									task: 'NO MATCH', 
+									client: 'NO MATCH', 
+									proyecto: 'NO MATCH', 
+									horas: 'NO MATCH'
+								};
+				query.on('end', function(){ client.end();});
+				res.render('tablemove', {
+					user : user,
+					movePassing : movePassing,
+					ver,
+					nombreTable
+				});				
+			};
+	
+
+		});
+	}
 
 });
 
