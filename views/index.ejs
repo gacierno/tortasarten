@@ -1,84 +1,70 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Torta de Sarten</title>
-	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
-</head>
-<body>
-	<div class="container">
-		<div class="page-header">
-			<h1>Torta de Sarten<small>          Powered By The Bytery</small></h1>
-		</div>
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <a class="navbar-brand" href="javascript:void(0);">Ver <%= ver %></a>
-		    </div>
+    <head>
 
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav">
-		      	<li>		       
-			        <a class="glyphicon glyphicon-home" href="javascript:void(0);"></a>
-			    </li>
-		        <li><a href="#">Link</a></li>
-		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-		          <ul class="dropdown-menu">
-		            <li><a href="#">Action</a></li>
-		          </ul>
-		        </li>
-		      </ul>
-		      <form class="navbar-form navbar-left" role="search">
-		        <div class="form-group">
-		          <input type="text" class="form-control" placeholder="Search">
-		        </div>
-		        <button type="submit" class="btn btn-default">Submit</button>
-		      </form>
-		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#">Link</a></li>
-		        <li class="dropdown">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-		          <ul class="dropdown-menu">
-		            <li><a href="#">Action</a></li>
-		            <li><a href="#">Another action</a></li>
-		            <li><a href="#">Something else here</a></li>
-		            <li role="separator" class="divider"></li>
-		            <li><a href="#">Separated link</a></li>
-		          </ul>
-		        </li>
-		      </ul>
-		    </div><!-- /.navbar-collapse -->
-		  </div><!-- /.container-fluid -->
-		</nav>
-		<div class="alert alert-success" role="alert">
-			<p>Logeed in as <%= user.mail %></p>
-		</div>
-		<h2>Please Log In</h2>
+                
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width"/>
+        <link rel="mask-icon" href="http://thebytery.com/pancake/third_party/themes/admin/pancake/img/mask-icon.svg?41114" color="rgb(232,163,75)">
+        <title>Login | The Bytery</title>
+        <link media="all" rel="stylesheet" type="text/css" href="http://thebytery.com/pancake/third_party/themes/admin/pancake/css/login.css?41114" />
+        <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="http://thebytery.com/pancake/third_party/themes/admin/pancake/css/lt7.css?41114" />
+ <![endif]-->
+    </head>
+    <body class="module-users controller-admin action-login login-layout not-main-layout">
+        <div id="header-area">
+            <h1 class='logo'>
+                <a href="http://thebytery.com/pancake/admin">
+                    <img  src='http://thebytery.com/pancake/uploads/branding/logo-bytery-black.png' class='header-logo '  alt='The Bytery' />
+                </a>
+            </h1>        
+        </div>
 
-		<div class="submit-area">
-			<form action="/login" method="post">			
-				<p>Usuario (mail):</p>
-				<input type="text" name="loginuser"label="Email">
-				<p>Password</p>
-				<input type="password" name="logpsw" label="Password">
-				<input type="submit">
-			</form>
-		</div>
-		<div class="register-area">
-			<form action="/registrationzone" method="get">	
-				<h2>Panel de Control</h2>		
-				<input type="submit">
+        <div id="wrapper">
+            <div id="main" class="form-holder">
+                <div id="login-box">
+                    <form action="/login" id="login-form" method="post">
+                        <fieldset>
+                            <div class="row">
+                                <label for="email">Username / Email:</label>
+                                <input type="text" name="loginuser" value="" id="username" class="txt" autocorrect="off" autocapitalize="off" spellcheck="false"  />            
+                            </div>
 
-			</form>
-		</div>
+                            <div class="row">
+                                <label for="password">Password:</label>
+                                <input type="password" name="logpsw" value="" id="password" class="txt"  />           
+                            </div>
 
+                            <div class="row">
+                                <label for="remember">Remember Me:</label>
+                                <input type="checkbox" name="remember" value="1" id="remember" />            
+                            </div>
 
-	</div>
+                            <div class="row">
+                                    <a href="http://thebytery.com/pancake/admin/users/forgot_password" id="forgot-password">Forgot your password?</a>                
+                            </div>
+                            
+                            <input type="submit" class="hidden-submit" />
+                            <button type="submit" class="blue-btn">
+                                <span>&nbsp;&nbsp;Login&nbsp;&nbsp;</span>
+                            </button>
 
-	<script src="jquery/dist/jquery.js"></script>
-	<script src="bootstrap/dist/js/bootstrap.js"></script>
-</body>
+                        </fieldset>
+                    </form>
+                    <div class="register-area">
+                        <form action="/registrationzone" method="get">  
+                            <h2>Panel de Control</h2>       
+                            <input type="submit">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /main end -->
+
+        </div>
+        <!-- /wrapper end -->
+        <script src="http://thebytery.com/pancake/third_party/themes/admin/pancake/js/login.js?41114"></script>
+    </body>
 </html>
