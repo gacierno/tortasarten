@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Torta de Sarten</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+	<link media="all" rel="stylesheet" type="text/css" href="/css/app.css" />
+	<link media="all" rel="stylesheet" type="text/css" href="/css/stacked.css" />
 	<style type="text/css">
 		td{
 			width: 15%;
@@ -17,9 +19,180 @@
 </head>
 <body>
 	<div class="container">
-		<div class="page-header">
-			<h1>Torta de Sarten<small>          Powered By The Bytery</small></h1>
+		<div class="fixed ">
+	        <nav class="top-bar">
+	            <ul>
+	            <!-- Title Area -->
+	                <li id="backend-logo" class="name">
+	                    <h1 class="logo"><a href="http://thebytery.com/pancake/admin"><img src="http://thebytery.com/pancake/uploads/branding/logo-bytery-black.png" class="header-logo " alt="The Bytery" style="width: auto; height: auto;"></a></h1>                    
+	                </li>
+					<li class="toggle-topbar"><a href="#"></a></li>
+	            </ul>
+	            <section>
+	                <ul class="left">
+	                    <li class="divider"></li>
+	                    <li class="has-dropdown js-not-more-li">
+	                        <a class="" href="#timers">Timers</a>
+	           				<ul class="dropdown">
+	           					<li class="title back js-generated"><h5><a href="#">Timers</a></h5></li>
+	                            <li class="    ">
+	                        		<a class="open-timer-app" href="http://thebytery.com/pancake/admin/projects/app">Pancake Timer App</a>
+	           					</li>
+	                        	<li class="    ">
+	                        		<a class="" href="http://thebytery.com/pancake/admin/timesheets">Timesheets</a>
+	            				</li>
+	                        	<li class=" pancake-navigation-label-container   ">
+	                           		<label class="pancake-navigation-label ">Projects</label>
+	            				</li>
+	                        	<li class="   has-dropdown ">
+	                        		<a class="" href="#timers-project-65">March 28 to April 2</a>
+			                	</li>
+	                        </ul>
+	                    </li>
+	                    <li class="active active js-not-more-li">
+	                        <a class="" href="http://thebytery.com/pancake/admin/projects">Projects</a>
+	                    </li>
+	                    <li class="js-not-more-li">
+	                        <a class="" href="http://thebytery.com/pancake/admin/clients">Clients</a>
+	                    </li>
+	                </ul>
+	                <ul class="right js-settings-dropdown">
+	                    <li class="has-dropdown">
+	                        <a href="http://thebytery.com/pancake/admin/settings#update" class="tiny button update-badge">1</a>
+	                        <a href="#"><img src="http://www.gravatar.com/avatar/7ff53aa065667ed9c8e691ca2fd3d172?s=30&amp;d=mm&amp;r=g" class="user-pic"><%= user.mail %></a>
+	                        <ul class="dropdown">
+	                          	<li class="title back js-generated"><h5><a href="#"><img src="http://www.gravatar.com/avatar/7ff53aa065667ed9c8e691ca2fd3d172?s=30&amp;d=mm&amp;r=g" class="user-pic"> German                            </a></h5></li>
+	                           	<li class="title back js-generated"><h5><a href="#">1</a></h5></li>
+	                            <li>
+	                                <form class="navbar-form navbar-left" action="/">
+				        				<button type="submit" class="btn btn-default">Log Out</button>
+				      				</form>
+	                            </li>
+	                        </ul>
+	                    </li>
+	                </ul>
+	            </section>
+	        </nav>
+	    </div>
+
+		<div id="main">
+			<div class="row"></div>
+			<div id="header">
+				 <div class="row">
+				   <h2 class="ttl ttl3">All Projects</h2>
+				   <div id="search-form">
+						<form method="get" class="search-form" action="http://thebytery.com/pancake/admin/search">
+					        <input type="text" id="search" placeholder="Search" name="q" value="">
+						    <button type="submit">go</button>
+						</form>
+						<div class="quick-menu">
+							<a href="#" id="qm" data-dropdown="drop1" title="Quick Add"><i class="fi-plus"></i></a>
+							<ul id="drop1" data-dropdown-content="" class="f-dropdown" style="display:none;"></ul>
+						</div>
+					</div><!-- /#search-form -->	 
+				</div>
+			</div>
+			<div class="row">
+		  		<div class="nine columns content-wrapper">
+		  			<div class="invoice-block">
+						<div id="ajax_container"></div>
+					</div>
+					<div class="row">
+						<div id="projectholder" style="height: 231px;">
+							<!-- Restart the row -->
+							<div id="project_container">
+					    		<div class="four columns mobile-four projectItem" style="position: absolute; left: 1px; top: 0px;">
+			      					<div class="project-box" id="project-65">
+			        					<h5 class="name"><a href="http://thebytery.com/pancake/admin/projects/view/65">March 28 to April 2</a></h5>
+			        					<p class="half-bottom"><span class="g16 user"></span>        	Stelter	        </p>
+			        					<p><span class="g16 cal"></span> n/a</p>
+			        					<!-- Assigned area for members/clients linked to the projects here -->
+			        					<span class="members-assigned">
+											<img src="http://www.gravatar.com/avatar/b67cb0773fe31a0f6834e13596bc9842?s=40&amp;d=mm&amp;r=g" class="members-pic">
+											<img src="http://www.gravatar.com/avatar/7ff53aa065667ed9c8e691ca2fd3d172?s=40&amp;d=mm&amp;r=g" class="members-pic">
+											<img src="http://www.gravatar.com/avatar/d106434d925a78c68d6c275ccca61ebb?s=40&amp;d=mm&amp;r=g" class="members-pic">
+											<img src="http://www.gravatar.com/avatar/aae31cb996e4a2c2133c234106ea712a?s=40&amp;d=mm&amp;r=g" class="members-pic">
+						
+			        					</span>
+			      					</div><!-- project box -->
+			      					<div class="project-footer">
+		                  	       		<strong>Tracked:</strong> 10:00	       
+			       						<!-- Project Percentage of Tasks -->
+			        	           		<div class="percent project_inprogress">0.0%</div>	         	      
+			        	           	</div><!-- "" -->
+			    				</div><!-- four -->
+
+					    
+
+				    			<div class="four columns mobile-four projectItem" style="position: absolute; left: 300px; top: 0px;">
+			      					<div class="project-box" id="project-6">
+			        					<h5 class="name"><a href="http://thebytery.com/pancake/admin/projects/view/6">Hakkasan - Recurring</a></h5>
+			        					<p class="half-bottom"><span class="g16 user"></span>        	Hakkasan Group	        </p>
+			        					<p><span class="g16 cal"></span> 06/29/2015</p>
+										<!-- Assigned area for members/clients linked to the projects here -->
+			        					<span class="members-assigned">
+
+										</span>
+			      					</div><!-- project box -->
+			      					<div class="project-footer">
+		                  	       		<strong>Tracked:</strong> 00:00	                      
+		                  	       		<ul class="invoice-buttons">
+			         						<li class="settings">
+			           							<ul>
+										 			<li><a href="http://thebytery.com/pancake/admin/projects/edit/6" class="fire-ajax no-bottom">Edit</a></li>
+													<li><a href="http://thebytery.com/pancake/admin/projects/archive/6">Archive Project</a></li>
+											 	</ul>
+			         						</li>
+			       						</ul>
+		               
+			       					<!-- Project Percentage of Tasks -->
+			        	           		<div class="percent project_na">N/A</div>
+			        	      		</div><!-- "" -->
+			   					</div><!-- four -->
+
+					    	</div>
+						
+						</div><!-- /projectholder -->
+					</div><!-- /row -->
+					
+					<div class="pagination"></div>
+				</div><!-- /nine columns content-wrapper-->
+
+		  		<div class="three columns side-bar-wrapper">
+			  		<div class="panel">
+		    			<h4 class="sidebar-title">Quick Links</h4>
+		    			<ul class="side-bar-btns">
+		                    <li>
+		                		<i class="quicklink-icon fi-plus"></i>
+		                		<a class="not-has-before fire-ajax" href="http://thebytery.com/pancake/admin/projects/create">
+				                    <span>Create Project</span>
+				                </a>
+		            		</li>
+		                    <li>
+				                <i class="quicklink-icon fi-plus"></i>
+				                <a class="not-has-before fire-ajax" href="http://thebytery.com/pancake/admin/projects/templates">
+				                    <span>Create from Template</span>
+				                </a>
+				            </li>
+		                    <li>
+				                <i class="quicklink-icon fi-trash"></i>
+				                <a class="not-has-before fire-ajax" href="http://thebytery.com/pancake/admin/projects/delete_templates">
+				                    <span>Delete Project Template</span>
+				                </a>
+				            </li>
+		               		<li>
+				                <i class="quicklink-icon fi-archive"></i>
+				                <a class="not-has-before " href="http://thebytery.com/pancake/admin/projects/archived">
+				                    <span>View Archive</span>
+				                </a>
+				            </li>
+		            	</ul>
+					</div>  
+				</div><!-- /three columns side-bar-wrapper-->
+			</div><!-- row -->
+
 		</div>
+
 		<nav class="navbar navbar-default">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
